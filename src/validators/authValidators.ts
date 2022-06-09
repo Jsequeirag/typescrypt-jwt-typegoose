@@ -1,13 +1,9 @@
 import { body, validationResult } from "express-validator";
 import { Request, Response, NextFunction } from "express";
 /* -------------------------------------------------------------------------- */
-/*                                    login                                   */
+/*                                    auth                                    */
 /* -------------------------------------------------------------------------- */
-/* --------------------------------- schema --------------------------------- */
-export const signinValidateSchema = [
-  body("username").exists().isLength({ min: 5, max: 10 }),
-  body("password").exists().isLength({ min: 6, max: 10 }),
-];
+
 /* ---------------------------------- error handler---------------------------------- */
 export const authErrorHandler = (
   req: Request,
@@ -20,11 +16,11 @@ export const authErrorHandler = (
   }
   next();
 };
-/* -------------------------------------------------------------------------- */
-/*                                   signup                                   */
-/* -------------------------------------------------------------------------- */
+/* --------------------------------- signup --------------------------------- */
 export const signupValidateSchema = [
   body("username").exists().isLength({ min: 5, max: 10 }),
   body("email").isEmail(),
   body("password").exists().isLength({ min: 6, max: 10 }),
 ];
+/* --------------------------------- signin --------------------------------- */
+export const signinValidateSchema = [body("email").isEmail().exists()];

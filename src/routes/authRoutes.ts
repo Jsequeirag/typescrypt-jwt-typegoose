@@ -7,14 +7,7 @@ import {
   signinValidateSchema,
   signupValidateSchema,
 } from "../validators/authValidators";
-router.post(
-  "/signin",
-  signinValidateSchema,
-  authErrorHandler,
-  (req: any, res: any) => {
-    res.sendStatus(201);
-  }
-);
+router.post("/signin", signinValidateSchema, authErrorHandler, signIn);
 router.post("/signup", signupValidateSchema, authErrorHandler, signUp);
 router.get("/profile", [verifyToken], profile);
 export default router;
